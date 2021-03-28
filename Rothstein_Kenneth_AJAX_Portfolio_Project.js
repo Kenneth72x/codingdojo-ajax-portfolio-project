@@ -1,15 +1,21 @@
 $(document).ready(function () {
-  $.get(
-    "http://api.openweathermap.org/data/2.5/weather?q=los%20angeles&appid=4543eb04eb3e98e64833b81b8ae9876b",
-    function (response) {
-      console.log(response);
-    }
-  );
-});
+  var apiKey = "4543eb04eb3e98e64833b81b8ae9876b";
 
-var dude = {
-  gender: "male",
-  height: "tall",
-  color: "clear",
-};
-$("#LAstuff").html(`<p> This dude is ${dude.color} </p>`);
+  $("form").submit(function () {
+    var city = $("#city").val();
+    var cityString = `${city}`;
+    var url = `https://api.openweathermap.org/data/2.5/weather?q=${cityString}&appid=${apiKey}&units=imperial`;
+
+    $.get(
+      url,
+      function (res) {
+        console.log(res);
+        var htmlString = `<h1>${cityString}</h1><p>Temperature: ${res.main.temp}&#3694;</p>`;
+        htmlString += `<p>Description: ${res.weather[0].description}</p><p>Wind Speed: ${res.wind.speed} mph</p>`;
+        $("#weather").html(htmlString);
+      },
+      "json"
+    );
+    return false;
+  });
+});
