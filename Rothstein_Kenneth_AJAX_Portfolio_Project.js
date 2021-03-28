@@ -10,9 +10,9 @@ $(document).ready(function () {
       url,
       function (res) {
         console.log(res);
-        var htmlString = `<h1>${cityString}</h1><p>Temperature: ${res.main.temp}&#3694;</p>`;
+        var htmlString = `<h1>${cityString}</h1><p>Temperature: ${res.main.temp}&#8457;</p>`;
         htmlString += `<p>Description: ${res.weather[0].description}</p><p>Wind Speed: ${res.wind.speed} mph</p>`;
-        $("#weather").html(htmlString);
+        $("#forecast").html(htmlString);
       },
       "json"
     );
